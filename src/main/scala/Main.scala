@@ -1,5 +1,7 @@
 object Main {
   def main(args: Array[String]):Unit = {
-    println("hey!")
+    val tokenizer = new SimpleTokenizer();
+    val tokens = tokenizer.tokenize("hey you!")
+    println(tokens.toList)
   }
 }
