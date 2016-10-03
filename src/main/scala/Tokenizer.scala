@@ -8,7 +8,9 @@ object SimpleTokenizer {
 
 class SimpleTokenizer extends Tokenizer {
   override def tokenize(str: String) = {
-    for (token <- str.split(SimpleTokenizer.pattern))
+    // kind of shitty (double traversal)
+    val preprocessed = str.replaceAll("\\-\n+", "-")
+    for (token <- preprocessed.split(SimpleTokenizer.pattern))
       yield token
   }
 }

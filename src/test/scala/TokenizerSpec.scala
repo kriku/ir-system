@@ -10,6 +10,13 @@ class TokenizerSpec extends FlatSpec with Matchers {
     tokens(1) should be ("def")
   }
 
+  "Tokenizer" should "split tokens by newline" in {
+    val tokens = tokenizer.tokenize("abc\ndef")
+    tokens.length should be (2)
+    tokens(0) should be ("abc")
+    tokens(1) should be ("def")
+  }
+
   it should "not split abbreviations" in {
     val tokens = tokenizer.tokenize("U.S.A.")
     tokens.length should be (1)
@@ -23,15 +30,15 @@ class TokenizerSpec extends FlatSpec with Matchers {
   }
 
   it should "not split by hyphen" in {
-    val tokens = tokenizer.tokenize("foo-bar")
+    val tokens = tokenizer.tokenize("state-of-the-art")
     tokens.length should be (1)
-    tokens(0) should be ("foo-bar")
+    tokens(0) should be ("state-of-the-art")
   }
 
-  it should "not split hyphen and newline" in {
-    val tokens = tokenizer.tokenize("foo-\nbar")
+  it should "not split by hyphen and newline" in {
+    val tokens = tokenizer.tokenize("state-of-\nthe-art")
     tokens.length should be (1)
-    tokens(0) should be ("foo-\nbar")
+    tokens(0) should be ("state-of-the-art")
   }
 
 }
